@@ -1,8 +1,8 @@
 using System;
-using System.Windows.Forms;
-using System.Drawing;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
@@ -23,6 +23,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 			m_getPersistStringCallback = getPersistStringCallback;
 
 			m_events = new EventHandlerList();
+			Form.FormClosing += new FormClosingEventHandler(Form_FormClosing);
 			Form.Disposed +=new EventHandler(Form_Disposed);
 			Form.TextChanged += new EventHandler(Form_TextChanged);
 		}
@@ -786,6 +787,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 			if (dockState == DockState.Unknown || dockState == DockState.Hidden)
 				throw(new ArgumentException(Strings.DockContentHandler_Show_InvalidDockState));
 
+			if ( Form.IsDisposed )
+				throw(new InvalidOperationException(Strings.DockContentHandler_Disposed));
+
             dockPanel.SuspendLayout(true);
 
 			DockPanel = dockPanel;
@@ -913,6 +917,22 @@ namespace WeifenLuo.WinFormsUI.Docking
 				handler(this, e);
 		}
 		#endregion
+
+		/// <summary>
+		/// 対応するフォームが閉じられようとしている時の処理です。
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Form_FormClosing( object sender, FormClosingEventArgs e )
+		{
+			IDockContent content = this.Form as IDockContent;
+			if ( this.DockPanel != null && content != null )
+			{
+				DockContentClosingEventArgs dockEventArgs = new DockContentClosingEventArgs( content, e.CloseReason );
+				this.DockPanel.InvokeDockContentClosing( dockEventArgs );
+				e.Cancel = dockEventArgs.Cancel;
+			}
+		}
 
 		private void Form_Disposed(object sender, EventArgs e)
 		{

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Diagnostics.CodeAnalysis;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
@@ -371,7 +370,9 @@ namespace WeifenLuo.WinFormsUI.Docking
                 get { return m_inRefreshActiveWindow; }
             }
 
-            private void RefreshActiveWindow()
+			// Ctrl+Tabされたときのために外部から呼び出せるようにしました。
+			// private void RefreshActiveWindow()
+			internal void RefreshActiveWindow()
             {
                 SuspendFocusTracking();
                 m_inRefreshActiveWindow = true;

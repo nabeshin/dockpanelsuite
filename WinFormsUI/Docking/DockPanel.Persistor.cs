@@ -1,12 +1,10 @@
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
-using WeifenLuo.WinFormsUI.Docking;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Globalization;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {

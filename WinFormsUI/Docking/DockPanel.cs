@@ -1,13 +1,10 @@
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Text;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Windows.Forms;
 
 // To simplify the process of finding the toolbox bitmap resource:
 // #1 Create an internal class called "resfinder" outside of the root namespace.
@@ -1075,6 +1072,27 @@ namespace WeifenLuo.WinFormsUI.Docking
 			EventHandler<DockContentEventArgs> handler = (EventHandler<DockContentEventArgs>)Events[ContentRemovedEvent];
 			if (handler != null)
 				handler(this, e);
+		}
+
+		/// <summary>
+		/// <see cref="DockContent"/>が閉じられようとしている時に実行されます。
+		/// </summary>
+		[LocalizedCategory("Category_DockingNotification")]
+		[Description("このDockPanelが持っているDockContentが閉じられようとしている時に実行されます。")]
+		public event EventHandler< DockContentClosingEventArgs > DockContentClosing = null;
+		
+		/// <summary>
+		/// <see cref="DockContentClosing"/>イベントを実行させるための処理です。
+		/// </summary>
+		/// <param name="e">実行するための引数を指定します。</param>
+		internal void InvokeDockContentClosing( DockContentClosingEventArgs e )
+		{
+			Debug.Assert( e != null );
+
+			if ( this.DockContentClosing != null )
+			{
+				this.DockContentClosing( this, e );
+			}
 		}
     }
 }

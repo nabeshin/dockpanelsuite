@@ -1,7 +1,6 @@
 using System;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
@@ -411,7 +410,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private void TimerMouseTrack_Tick(object sender, EventArgs e)
             {
-                if (IsDisposed)
+                if (IsDisposed || DockPanel.IsDisposed)
                     return;
 
                 if (ActivePane == null || ActivePane.IsActivated)

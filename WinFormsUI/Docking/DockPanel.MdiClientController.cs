@@ -1,9 +1,8 @@
 using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
@@ -358,8 +357,18 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (content == null)
                 return;
 
-            if (content.DockHandler.DockPanel == this && content.DockHandler.Pane != null)
-                content.DockHandler.Pane.ActiveContent = content;
+			// Ctrl + Tabを押すとDockPanel.ActiveDocumentや
+			//	DockPanel.ActiveContentがおかしくなっていたので
+			//	RefreshActiveWindowを呼び出して再調整するようにしました。
+
+			//if (content.DockHandler.DockPanel == this && content.DockHandler.Pane != null)
+			//    content.DockHandler.Pane.ActiveContent = content;
+
+			if (content.DockHandler.DockPanel == this && content.DockHandler.Pane != null)
+			{
+				content.DockHandler.Pane.ActiveContent = content;
+				m_focusManager.RefreshActiveWindow();
+			}
         }
 
         private bool MdiClientExists

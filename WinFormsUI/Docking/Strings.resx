@@ -363,4 +363,7 @@
   <data name="DockPanel_SupportDeeplyNestedContent_Description" xml:space="preserve">
     <value>Support deeply nested controls.  Disabling this setting may improve resize performance but may cause heavily nested content not to resize.</value>
   </data>
+  <data name="DockContentHandler_Disposed" xml:space="preserve">
+    <value>Form has been disposed.</value>
+  </data>
 </root>
