@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeifenLuo.WinFormsUI.Docking {
-    using System;
-    
-    
-    /// <summary>
+namespace WeifenLuo.WinFormsUI.Docking
+{
+
+
+	/// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
     // このクラスは StronglyTypedResourceBuilder クラスが ResGen

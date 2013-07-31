@@ -1,5 +1,5 @@
-﻿using WeifenLuo.WinFormsUI.Docking.Skins;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using WeifenLuo.WinFormsUI.Docking.Skins;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
