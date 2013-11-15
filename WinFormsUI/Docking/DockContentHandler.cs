@@ -643,13 +643,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
                 }
                 else if (DockHelper.IsDockStateAutoHide(DockState))
-                {
-                    if (DockPanel.ActiveAutoHideContent != Content)
-                    {
-                        DockPanel.ActiveAutoHideContent = null;
-                        return;
-                    }
-                }
+                    DockPanel.ActiveAutoHideContent = Content;
 
                 if (!Form.ContainsFocus)
                     if (!Win32Helper.IsRunningOnMono)
